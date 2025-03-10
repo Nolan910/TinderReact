@@ -1,4 +1,4 @@
-# Projet reproduction Tinder
+# Projet reproduction Tinder Nolan Fievet
 
 Ceci  est un projet de reproduction de Tinder en application développé avec React Native
 
