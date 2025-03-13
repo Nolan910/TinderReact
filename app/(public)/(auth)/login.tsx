@@ -1,58 +1,74 @@
-import {
-  View,
-  Text,
-  Platform,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import {View,Text,Platform,SafeAreaView,TextInput,TouchableOpacity,Image,} from "react-native";
 import { useRouter } from "expo-router";
 import useUserStore from "@/store/user.store";
-import { save } from "@/lib/utils/secure_store";
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+//import { save } from "@/lib/utils/secure_store";
+import { useState, useEffect } from "react";
+//import { useMutation } from "@tanstack/react-query";
+
 
 export default function LoginScreen() {
   const platform = Platform.OS;
 
   const router = useRouter();
   const { setIsAuthenticated, setUser }: any = useUserStore();
-  const [fields, setFields] = useState({
-    email: "exemple@gmail.com",
-    password: "exemple",
-  });
 
-  const mutation = useMutation({
-    mutationFn: async (credentials: { email: string; password: string }) => {
-      const username = credentials.email;
-      const password = credentials.password;
-      return fetch("https://api-tinder-next.vercel.app/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      }).then((res) => res.json());
-    },
-    onSuccess: async (data) => {
-      setIsAuthenticated(true);
-      setUser(data);
-      if (platform !== "web") {
-        await save("token", data?.token as string);
-      } else {
-        localStorage.setItem("token", data?.token as string);
-        router.push("/(private)/(tabs)");
-      }
-    },
-    onError: (error) => {
-      console.log("error", error);
-    },
-  });
+  // const [fields, setFields] = useState({
+  //   email: "exemple@gmail.com",
+  //   password: "exemple",
+  // });
 
-  const handleSubmit = () => {
-    mutation.mutate({ email: fields.email, password: fields.password });
-  };
+  const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState(false)
+    const [loginAttempted, setLoginAttempted] = useState(false);
+
+  // const mutation = useMutation({
+  //   mutationFn: async (credentials: { email: string; password: string }) => {
+  //     const username = credentials.email;
+  //     const password = credentials.password;
+  //     return fetch("https://api-tinder-next.vercel.app/api/auth/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ username, password }),
+  //     }).then((res) => res.json());
+  //   },
+  //   onSuccess: async (data) => {
+  //     setIsAuthenticated(true);
+  //     setUser(data);
+  //     if (platform !== "web") {
+  //       await save("token", data?.token as string);
+  //     } else {
+  //       localStorage.setItem("token", data?.token as string);
+  //       router.push("/(private)/(tabs)");
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     console.log("error", error);
+  //   },
+  // });
+
+  const handleLogin = async () => {   
+    if(email  === "exemple@gmail.com" && password === "exemple"){            
+      setLoginAttempted(true)
+      // setIsAuthenticated(true);
+        router.replace("/(private)/(tabs)");            
+    } else {
+        setError(true)
+        console.error('error' + error)
+    }
+};
+
+  // const handleSubmit = () => {
+  //   mutation.mutate({ email: fields.email, password: fields.password });
+  // };
+
+  useEffect(() => {
+    if (loginAttempted) {
+      setIsAuthenticated(true); 
+    }
+  }, [loginAttempted, email, setIsAuthenticated, setUser]);
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-gray-900">
@@ -60,8 +76,9 @@ export default function LoginScreen() {
         {/* En-tête */}
         <View className="mb-8 items-center">
           <Image
-            source={require("@/assets/images/react-logo.png")}
+            source={require("@/assets/images/LogoTinder.png")}
             className="h-32 w-32"
+            style={{width: 72, height: 84}}
           />
           <Text className="mt-4 text-2xl font-bold text-gray-900 dark:text-white">
             Connexion
@@ -77,9 +94,7 @@ export default function LoginScreen() {
               className="rounded-lg border border-gray-300 bg-white p-4 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
               placeholder="Entrez votre email"
               placeholderTextColor="#9CA3AF"
-              onChangeText={(text) =>
-                setFields((prevState) => ({ ...prevState, email: text }))
-              }
+              onChangeText={setEmail}
               keyboardType="email-address"
               autoCapitalize="none"
             />
@@ -95,9 +110,7 @@ export default function LoginScreen() {
               placeholder="Entrez votre mot de passe"
               placeholderTextColor="#9CA3AF"
               secureTextEntry
-              onChangeText={(text) =>
-                setFields((prevState) => ({ ...prevState, password: text }))
-              }
+              onChangeText={setPassword}
             />
           </View>
 
@@ -112,7 +125,7 @@ export default function LoginScreen() {
           {/* Bouton de connexion */}
           <TouchableOpacity
             className="mt-4 rounded-lg bg-blue-500 p-4"
-            onPress={handleSubmit}
+            onPress={handleLogin}
           >
             <Text className="text-center font-semibold text-white">
               Se connecter

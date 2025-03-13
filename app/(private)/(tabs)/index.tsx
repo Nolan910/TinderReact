@@ -1,13 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  Dimensions,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import {StyleSheet,View,Text,SafeAreaView,Dimensions,TouchableOpacity,Image,} from "react-native";
 import Swiper from "react-native-deck-swiper";
 import { AntDesign } from "@expo/vector-icons";
 import useUserStore from "@/store/user.store";
@@ -20,31 +12,31 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const tutorialCards = [
   {
     id: 1,
-    title: "Bienvenue sur TinderClone!",
-    description: "Apprenez à créer une app de rencontre avec React Native",
-    image: "https://picsum.photos/id/1/400/600",
-    tip: "👋 Swipez les cartes pour découvrir le tutoriel",
+    title: "Personne 1",
+    description: "Bio de personne 1",
+    image: "https://media.istockphoto.com/id/1386479313/fr/photo/heureuse-femme-daffaires-afro-am%C3%A9ricaine-mill%C3%A9naire-posant-isol%C3%A9e-sur-du-blanc.jpg?s=612x612&w=0&k=20&c=CS0xj40eNCorQyzN1ImeMKlvPDocPHSaMsXethQ-Q_g=",
+    age: 20,
   },
   {
     id: 2,
-    title: "React Native & Expo",
-    description: "Un framework puissant pour créer des apps mobiles",
-    image: "https://picsum.photos/id/2/400/600",
-    tip: "💡 Utilisez les composants natifs pour de meilleures performances",
+    title: "Personne 2",
+    description: "Bio de personne 2",
+    image: "https://media.istockphoto.com/id/1335941248/fr/photo/plan-dun-beau-jeune-homme-debout-sur-un-fond-gris.jpg?s=612x612&w=0&k=20&c=YK04b0z7MLjvJ1V88YvIDn8F5B_LUMP9CTaj4ffm6V0=",
+    age: 22,
   },
   {
     id: 3,
-    title: "Navigation & Auth",
-    description: "Gérez la navigation et l'authentification",
-    image: "https://picsum.photos/id/3/400/600",
-    tip: "🔐 Protégez vos routes avec expo-router",
+    title: "Personne 3",
+    description: "Bio de personne 3",
+    image: "https://media.istockphoto.com/id/501289144/fr/photo/jeune-homme-de-randonn%C3%A9e-atteint-le-sommet-de-la-montagne-et-est-une-autophoto-portrait.jpg?s=612x612&w=0&k=20&c=EQIOGaKVMeP9LlAEeqP8tLVURoyv8EOFNZXEhc8ja-o=",
+    age: 33,
   },
   {
     id: 4,
-    title: "UI/UX Design",
-    description: "Créez une interface utilisateur attrayante",
-    image: "https://picsum.photos/id/4/400/600",
-    tip: "✨ Animations fluides avec Reanimated",
+    title: "Personne 4",
+    description: "Bio de personne 4",
+    image: "https://media.istockphoto.com/id/1686871820/fr/photo/homme-gay-mature-dans-une-belle-robe-rouge-faisant-un-autoportrait-et-soufflant-un-baiser-sur.jpg?s=612x612&w=0&k=20&c=p7LCOyrZlE-KlwFtbAp4FL18cHEdN_S7EczpNfShNo4=",
+    age: 46,
   },
 ];
 
@@ -67,7 +59,7 @@ export default function HomeScreen() {
         <View style={styles.cardContent}>
           <Text style={styles.cardTitle}>{card.title}</Text>
           <Text style={styles.cardDescription}>{card.description}</Text>
-          <Text style={styles.cardTip}>{card.tip}</Text>
+          <Text style={styles.cardAge}>{card.age}</Text>
         </View>
       </View>
     );
@@ -76,7 +68,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>TinderClone Tutorial</Text>
+        <Text style={styles.headerTitle}>Swipe</Text>
         <TouchableOpacity onPress={logout} style={styles.logoutButton}>
           <AntDesign name="logout" size={24} color="#FF6B6B" />
         </TouchableOpacity>
@@ -191,7 +183,7 @@ const styles = StyleSheet.create({
     color: "#666",
     marginBottom: 12,
   },
-  cardTip: {
+  cardAge: {
     fontSize: 14,
     color: "#FF6B6B",
     fontStyle: "italic",

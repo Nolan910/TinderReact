@@ -4,9 +4,9 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 interface UserState {
   user: { email: string } | null;
-  isAuthentificated: boolean;
+  isAuthenticated: boolean;
   setUser: (user: { email: string }) => void;
-  setIsAuthentificated: (isAuthentificated: boolean) => void;
+  setIsAuthenticated: (setIsAuthenticated: boolean) => void;
   logout: () => void;
 }
 
@@ -14,14 +14,14 @@ const useUserStore = create<UserState>()(
   persist(
     (set) => ({
       user: null,
-      isAuthentificated: false,
-      setUser: (user) => set({ user, isAuthentificated: true }),
-      setIsAuthentificated: (isAuthentificated) => set({ isAuthentificated }),
+      isAuthenticated: false,
+      setUser: (user) => set({ user, isAuthenticated: true }),
+      setIsAuthenticated: (isAuthenticated) => set({ isAuthenticated }),
       logout: () => {
         AsyncStorage.removeItem('user-storage'); 
-        set({ user: null, isAuthentificated: false });
+        set({ user: null, isAuthenticated: false });
       },
-      // logout: () => set({ user: null, isAuthentificated: false }),
+      // logout: () => set({ user: null, isAuthenticated: false }),
     }),
     {
       name: 'user-storage', 
