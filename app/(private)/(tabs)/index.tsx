@@ -12,10 +12,10 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const tutorialCards = [
   {
     id: 1,
-    title: "Personne 1",
-    description: "Bio de personne 1",
+    title: "Agathe",
+    description: "Aime la photograpie et le dessin",
     image: "https://media.istockphoto.com/id/1386479313/fr/photo/heureuse-femme-daffaires-afro-am%C3%A9ricaine-mill%C3%A9naire-posant-isol%C3%A9e-sur-du-blanc.jpg?s=612x612&w=0&k=20&c=CS0xj40eNCorQyzN1ImeMKlvPDocPHSaMsXethQ-Q_g=",
-    age: 20,
+    age: 25,
   },
   {
     id: 2,
@@ -26,8 +26,8 @@ const tutorialCards = [
   },
   {
     id: 3,
-    title: "Personne 3",
-    description: "Bio de personne 3",
+    title: "Jean-Guillaume",
+    description: "Amateur de randonées",
     image: "https://media.istockphoto.com/id/501289144/fr/photo/jeune-homme-de-randonn%C3%A9e-atteint-le-sommet-de-la-montagne-et-est-une-autophoto-portrait.jpg?s=612x612&w=0&k=20&c=EQIOGaKVMeP9LlAEeqP8tLVURoyv8EOFNZXEhc8ja-o=",
     age: 33,
   },
@@ -59,7 +59,7 @@ export default function HomeScreen() {
         <View style={styles.cardContent}>
           <Text style={styles.cardTitle}>{card.title}</Text>
           <Text style={styles.cardDescription}>{card.description}</Text>
-          <Text style={styles.cardAge}>{card.age}</Text>
+          <Text style={styles.cardAge}>{card.age} ans</Text>
         </View>
       </View>
     );
